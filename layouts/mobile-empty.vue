@@ -56,4 +56,16 @@ p {
   color: black;
   border-color: @primary-color;
 }
+
+button {
+  width: 95%;
+}
+
+.ant-btn {
+  height: 38px;
+}
+
+.button-group {
+  margin-top: 5vh;
+}
 </style>

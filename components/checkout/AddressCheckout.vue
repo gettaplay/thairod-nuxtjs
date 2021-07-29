@@ -1,31 +1,32 @@
 <template>
   <div>
     <a-row class="address-wrapper" justify="space-between" type="flex">
-      <a-col span="8">
-        Name:
+      <a-col span="4">
+        <img :src="require('~/assets/images/icons/user-icon.png')" alt="user-icon">
       </a-col>
-      <a-col class="value-detail" span="16">
+      <a-col class="value-detail" span="20">
         {{ detail.firstName }} {{ detail.lastName }}
       </a-col>
 
-      <a-col span="8">
-        Phone:
+      <a-col span="4">
+        <img :src="require('~/assets/images/icons/telephone-icon.png')" alt="telephone-icon">
       </a-col>
-      <a-col class="value-detail" span="16">
+      <a-col class="value-detail" span="20">
         {{ detail.telephone }}
       </a-col>
 
-      <a-col span="8">
-        Address:
+      <a-col span="4">
+        <img :src="require('~/assets/images/icons/pin-icon.png')" alt="pin-icon">
       </a-col>
-      <a-col class="value-detail" span="16">
+      <a-col class="value-detail" span="20">
         {{ detail.address }}
       </a-col>
 
-      <a-col span="8">
-        Optional:
+      <a-col span="24">
+        MAP
       </a-col>
-      <a-col class="value-detail" span="16">
+
+      <a-col class="value-detail" span="20">
         {{ detail.optional }}
       </a-col>
     </a-row>

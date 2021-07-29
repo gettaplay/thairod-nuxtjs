@@ -19,6 +19,7 @@
       <a-col :md="12" :span="24">
         <p>จังหวัด</p>
         <a-select
+          class="select-custom"
           style="width: 100%"
         />
       </a-col>
@@ -53,19 +54,12 @@
       </a-col>
     </a-row>
 
-    <a-row justify="space-around" type="flex">
-      <a-col span="11">
-        <a-button block>
-          กลับ
-        </a-button>
+    <a-row class="button-group" type="flex">
+      <a-col span="12">
+        <secondary-button :on-click="clickBack" :text="'กลับ'" />
       </a-col>
-
-      <a-col span="2" />
-
-      <a-col span="11">
-        <a-button block type="primary" @click="goToOrderConfirmation">
-          ต่อไป
-        </a-button>
+      <a-col span="12">
+        <primary-button :on-click="goToOrderConfirmation" :text="'ต่อไป'" />
       </a-col>
     </a-row>
   </div>
@@ -76,12 +70,21 @@ import Vue from 'vue'
 import CheckoutModule from '~/store/checkout.module'
 import { Order } from '~/types/order.type'
 import CommonModule from '~/store/common.module'
+import PrimaryButton from '~/components/procurement/buttons/PrimaryButton.vue'
+import SecondaryButton from '~/components/procurement/buttons/SecondaryButton.vue'
 
 export default Vue.extend({
+  components: {
+    PrimaryButton,
+    SecondaryButton
+  },
   layout: 'mobile-empty',
   data () {
     return {
-      form: {}
+      form: {
+        firstName: '',
+        lastName: ''
+      }
     }
   },
   computed: {
@@ -100,6 +103,9 @@ export default Vue.extend({
   methods: {
     goToOrderConfirmation (): void {
       this.$router.push('/checkout/checkout-confirmation')
+    },
+    clickBack (): void {
+      //  back method
     }
   }
 })

@@ -13,21 +13,30 @@
     <h3>รายละเอียดสินค้า:</h3>
     <ItemOrder :items="order.orderLines" />
 
-    <a-row class="button-wrapper" justify="space-around" type="flex">
-      <a-col span="11">
-        <a-button block @click="backToAddress">
-          กลับ
-        </a-button>
+    <a-row class="button-group" type="flex">
+      <a-col span="12">
+        <secondary-button :on-click="backToAddress" :text="'ยกเลิก'" />
       </a-col>
-
-      <a-col span="2" />
-
-      <a-col span="11">
-        <a-button block type="primary" @click="submitOrder">
-          ยืนยัน
-        </a-button>
+      <a-col span="12">
+        <primary-button :on-click="submitCheckout" :text="'ยืนยัน'" />
       </a-col>
     </a-row>
+
+    <a-modal
+      v-model="isSubmit"
+      :closable="false"
+      :footer="null"
+      :style="{width: '130px'}"
+      class="modal"
+    >
+      <div class="modal-content">
+        <h3>บันทึกข้อมูลเรียบร้อย</h3>
+        <p>
+          ได้ทำการยืนยันที่อยู่ของท่านเรียบร้อย
+          กรุณารอรับกล่องช่วยเหลือของท่าน
+        </p>
+      </div>
+    </a-modal>
   </div>
 </template>
 
@@ -35,6 +44,8 @@
 import Vue from 'vue'
 import ItemOrder from '~/components/checkout/ItemCheckout.vue'
 import AddressOrder from '~/components/checkout/AddressCheckout.vue'
+import PrimaryButton from '~/components/procurement/buttons/PrimaryButton.vue'
+import SecondaryButton from '~/components/procurement/buttons/SecondaryButton.vue'
 import CheckoutModule from '~/store/checkout.module'
 import { Order } from '~/types/order.type'
 import CommonModule from '~/store/common.module'
@@ -42,7 +53,9 @@ import CommonModule from '~/store/common.module'
 export default Vue.extend({
   components: {
     ItemOrder,
-    AddressOrder
+    AddressOrder,
+    PrimaryButton,
+    SecondaryButton
   },
   layout: 'mobile-empty',
   data () {
@@ -64,12 +77,13 @@ export default Vue.extend({
       this.$router.push('/checkout')
     },
 
-    submitOrder (): void {
+    submitCheckout (): void {
       this.isSubmit = true
-      // hide alert box
+      const second = 10 * 1000
+      // hide modal box
       setTimeout(() => {
         this.isSubmit = false
-      }, 3000)
+      }, second)
     }
   }
 })
@@ -84,13 +98,13 @@ export default Vue.extend({
   height: 2px;
 }
 
-.ant-alert.ant-alert-success {
-  background: #096F5A;
-  margin-bottom: 8px;
-}
-
 h3 {
   margin: 10px 0;
+}
+
+.modal-content {
+  text-align: center;
+  margin: 40px;
 }
 </style>
 
