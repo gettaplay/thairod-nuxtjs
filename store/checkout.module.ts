@@ -3,7 +3,7 @@ import { store } from '@/store'
 import { Order } from '~/types/order.type'
 
 // remove duplicate module
-const name: string = 'CheckoutModule'
+const name: string = 'checkoutModule'
 if (store.state[name]) {
   store.unregisterModule(name)
 }

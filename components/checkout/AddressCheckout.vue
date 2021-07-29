@@ -52,8 +52,4 @@ export default Vue.extend({
 .address-wrapper .ant-col {
   margin: 8px 0 0 0;
 }
-
-.value-detail {
-  font-weight: bold;
-}
 </style>

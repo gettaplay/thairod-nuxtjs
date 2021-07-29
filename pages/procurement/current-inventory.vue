@@ -1,10 +1,10 @@
 <template>
   <div>
-    <ProcurementHeader :title="'ยอดรวมในคลังสินค้า'" :on-back-button-click="onBackButtonClick"/>
+    <ProcurementHeader :on-back-button-click="onBackButtonClick" :title="'ยอดรวมในคลังสินค้า'" />
     <InventoryDetail
-      :warehouse-stocks="warehouseStocks"
       :left-card="leftCard"
       :right-card="rightCard"
+      :warehouse-stocks="warehouseStocks"
     />
   </div>
 </template>
@@ -13,6 +13,7 @@
 import Vue from 'vue'
 import ProcurementHeader from '~/components/procurement/ProcurementHeader.vue'
 import InventoryDetail from '~/components/procurement/InventoryDetail.vue'
+
 export default Vue.extend({
   components: { InventoryDetail, ProcurementHeader },
   data () {

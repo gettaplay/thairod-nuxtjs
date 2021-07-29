@@ -1,22 +1,22 @@
 <template>
   <div>
-    <h2 v-if="!isSubmit">
-      กรุณาตรวจสอบข้อมูล
-    </h2>
-    <a-alert v-else class="alert-box" message="Successfully Submit" type="success" />
+    <a-alert v-if="isSubmit" class="alert-box" message="Successfully Submit" type="success" />
 
-    <h3>Order Detail:</h3>
-    <ItemOrder :items="order.orderLines" />
+    <h3>กล่องสีเขียว</h3>
+    <img :src="require('~/assets/images/mockup/default-checkout-green.svg')" alt="package-image">
+
+    <h3>รายละเอียดผู้รับการรักษา:</h3>
+    <AddressOrder :detail="order.address" />
 
     <a-divider />
 
-    <h3>Address Detail:</h3>
-    <AddressOrder :detail="order.address" />
+    <h3>รายละเอียดสินค้า:</h3>
+    <ItemOrder :items="order.orderLines" />
 
     <a-row class="button-wrapper" justify="space-around" type="flex">
       <a-col span="11">
         <a-button block @click="backToAddress">
-          Back
+          กลับ
         </a-button>
       </a-col>
 
@@ -24,7 +24,7 @@
 
       <a-col span="11">
         <a-button block type="primary" @click="submitOrder">
-          Submit
+          ยืนยัน
         </a-button>
       </a-col>
     </a-row>
@@ -33,10 +33,11 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import ItemOrder from '~/components/order/ItemOrder.vue'
-import AddressOrder from '~/components/order/AddressOrder.vue'
-import OrderModule from '~/store/order.module'
+import ItemOrder from '~/components/checkout/ItemCheckout.vue'
+import AddressOrder from '~/components/checkout/AddressCheckout.vue'
+import CheckoutModule from '~/store/checkout.module'
 import { Order } from '~/types/order.type'
+import CommonModule from '~/store/common.module'
 
 export default Vue.extend({
   components: {
@@ -51,15 +52,16 @@ export default Vue.extend({
   },
   computed: {
     order (): Order {
-      return OrderModule.order
+      return CheckoutModule.order
     }
   },
   async mounted () {
-    await OrderModule.getOrder({ id: 1 })
+    CommonModule.setHeaderTitle({ header: 'กรุณาตรวจสอบข้อมูล' })
+    await CheckoutModule.getOrder({ id: 1 })
   },
   methods: {
     backToAddress (): void {
-      this.$router.push('/order')
+      this.$router.push('/checkout')
     },
 
     submitOrder (): void {
@@ -75,16 +77,20 @@ export default Vue.extend({
 
 <style scoped>
 .button-wrapper {
-  margin-top: 10px;
+  margin: 20px 0;
 }
 
 .ant-divider {
-  height: 4px;
+  height: 2px;
 }
 
 .ant-alert.ant-alert-success {
   background: #096F5A;
   margin-bottom: 8px;
+}
+
+h3 {
+  margin: 10px 0;
 }
 </style>
 
